@@ -161,7 +161,133 @@ export const dynamicRoutes = [
         meta: { title: '修改生成配置', activeMenu: '/tool/gen' }
       }
     ]
-  }
+  },
+  {
+    path: '/exam/exam-update',
+    component: Layout,
+    hidden: true,
+    permissions: ['exam:exam:edit'],
+    children: [
+      {
+        path: 'exam/update/:id(\\d+)',
+        component: () => import('@/views/exam/exam/form'),
+        name: 'UpdateExam',
+        meta: { title: '修改考试', activeMenu: '/exam/exam' }
+      }
+    ]
+  },
+  {
+    path: '/exam/paper-to',
+    component: Layout,
+    hidden: true,
+    permissions: ['exam:paper:edit'],
+    children: [
+      {
+        path: 'exam/prepare/:examId',
+        component: () => import('@/views/exam/paper/preview'),
+        name: 'PreExam',
+        meta: { title: '准备考试', noCache: true, activeMenu: '/my/exam' },
+      }
+    ]
+  },
+  {
+    path: '/exam/paper-begin',
+    component: Layout,
+    hidden: true,
+    permissions: ['exam:paper:edit'],
+    children: [
+      {
+        path: '/exam/start/:id',
+        component: () => import('@/views/exam/paper/exam'),
+        name: 'StartExam',
+        meta: { title: '开始考试' },
+      }
+    ]
+  },
+  {
+    path: '/exam/paper-line',
+    component: Layout,
+    hidden: true,
+    permissions: ['exam:paper:edit'],
+    children: [
+      {
+        path: 'exam/exam',
+        component: () => import('@/views/exam/paper/list'),
+        name: 'ExamOnline',
+        meta: { title: '在线考试', noCache: true, icon: 'guide' }
+      }
+    ]
+  },
+  {
+    path: '/exam/paper/records',
+    component: Layout,
+    hidden: true,
+    permissions: ['exam:paper:edit'],
+    children: [
+      {
+        path: 'exam/records',
+        component: () => import('@/views/exam/user/my'),
+        name: 'ListMyExam',
+        meta: { title: '我的成绩', noCache: true, icon: 'results' }
+      }
+    ]
+  },
+  {
+    path: '/exam/paper/records-error',
+    component: Layout,
+    hidden: true,
+    permissions: ['exam:paper:edit'],
+    children: [
+      {
+        path: 'book/list/:examId',
+        component: () => import('@/views/exam/user/book'),
+        name: 'BookList',
+        meta: { title: '考试错题', noCache: true, activeMenu: '/my/exam/records' },
+      }
+    ]
+  },
+  {
+    path: '/exam/paper/records-train',
+    component: Layout,
+    hidden: true,
+    permissions: ['exam:paper:edit'],
+    children: [
+      {
+        path: 'book/training/:examId',
+        component: () => import('@/views/exam/user/book/train'),
+        name: 'BookTraining',
+        meta: { title: '错题训练', noCache: true, activeMenu: '/my/exam/records' },
+      }
+    ]
+  },
+  {
+    path: '/exam/paper/result-view',
+    component: Layout,
+    hidden: true,
+    permissions: ['exam:paper:result:edit'],
+    children: [
+      {
+        path: 'exam/result/:id',
+        component: () => import('@/views/exam/paper/result'),
+        name: 'ShowExam',
+        meta: { title: '考试结果', noCache: true, activeMenu: '/online/exam' },
+      }
+    ]
+  },
+  {
+    path: '/exam/exam/list',
+    component: Layout,
+    hidden: true,
+    permissions: ['exam:exam:list'],
+    children: [
+      {
+        path: 'exam',
+        component: () => import('@/views/exam/exam'),
+        name: 'ListExam',
+        meta: { title: '考试管理', noCache: true, icon: 'log' }
+      }
+    ]
+  },
 ]
 
 // 防止连续点击多次路由报错

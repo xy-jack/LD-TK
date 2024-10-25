@@ -99,4 +99,23 @@ public interface ISysJobService
      * @return 结果
      */
     public boolean checkCronExpressionIsValid(String cronExpression);
+
+    /**
+     * 删除任务后，所对应的trigger也将被删除
+     *
+     * @param jobName 任务名称
+     * @param jobGroup 任务分组
+     * @return 结果
+     */
+    public void deleteJobByName(String jobName, String jobGroup);
+
+    /**
+     * 添加定时任务
+     * @param jobClass
+     * @param jobName
+     * @param cron
+     * @param data
+     */
+    void addCronJob(Class jobClass, String jobName, String cron, String data);
+
 }
