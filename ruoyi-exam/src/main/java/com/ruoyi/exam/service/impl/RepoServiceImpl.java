@@ -12,7 +12,9 @@ import com.ruoyi.exam.mapper.RepoMapper;
 import com.ruoyi.exam.service.IRepoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -35,6 +37,9 @@ public class RepoServiceImpl extends ServiceImpl<RepoMapper, Repo> implements IR
         //复制参数
         Repo entity = new Repo();
         BeanUtils.copyProperties(reqDTO, entity);
+        if (StringUtils.hasLength(entity.getId())) {
+            entity.setUpdateTime(LocalDateTime.now());
+        }
         this.saveOrUpdate(entity);
     }
 }

@@ -15,6 +15,10 @@
         <result column="analysis" property="analysis" />
     </resultMap>
 
+    <resultMap id="ListResultMap" type="com.ruoyi.exam.domain.vo.QuVO" extends="BaseResultMap">
+        <result column="title" property="title" />
+    </resultMap>
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         `id`,`qu_type`,`level`,`image`,`content`,`create_time`,`update_time`,`remark`,`analysis`
@@ -77,10 +81,12 @@
         </where>
     </sql>
 
-    <select id="selectQuList" resultMap="BaseResultMap">
-        SELECT q.*
+    <select id="selectQuList" resultMap="ListResultMap">
+        SELECT
+            <include refid="Base_Column_List"></include>
         FROM tk_qu q
-        LEFT JOIN tk_qu_repo po ON q.id=po.qu_id
+        LEFT JOIN tk_qu_repo po ON q.id = po.qu_id
+        LEFT JOIN tk_repo tr ON tr.id = po.repo_id
         <include refid="query" />
         GROUP BY q.id ORDER BY q.update_time DESC
     </select>
